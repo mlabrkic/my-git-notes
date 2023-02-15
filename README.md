@@ -1,1 +1,4 @@
-# my-notes-comp
+### my-notes-comp
+
+[Markdown Guide](/markdown.md)
+
