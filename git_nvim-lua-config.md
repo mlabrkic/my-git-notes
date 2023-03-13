@@ -1,37 +1,16 @@
-### No_ 01: Forking "kickstart.nvim" GitHub Repository
 
-You will only need to do this once.
+### No_ 01: Cloning "kickstart.nvim" Repository
 
-Go to <br>
 https://github.com/nvim-lua/kickstart.nvim
 
-Press "Fork" on the top right. <br>
-When asked where to fork the repository, choose to fork it to your username.
+`cd C:\PROJECTS\` <br>
+`git clone https://github.com/nvim-lua/kickstart.nvim.git`
 
-Your forked "kickstart.nvim" repository will be created at <br>
-https://github.com\/<username\>/kickstart.nvim <br>
-https://github.com/mlabrkic/kickstart.nvim
-
-NOTE: <br>
-I changed the name of the repository from "kickstart.nvim" to "nvim-lua-config". <br>
-https://github.com/mlabrkic/nvim-lua-config
-
-
-### No_ 02: Cloning a Forked "kickstart.nvim" Repository
-
-NOTE: <br>
-`git clone https://github.com/mlabrkic/nvim-lua-config.git`
-
-C:\GITHUB\nvim-lua-config\\.git\
+NOTE: I changed the name of the repository from "kickstart.nvim" to "nvim-lua-config". <br>
+C:\PROJECTS\nvim-lua-config\
 
 ```
-HEAD
-
-ref: refs/heads/master
-```
-
-```
-config
+C:\PROJECTS\nvim-lua-config\.git\config
 
 [core]
 	repositoryformatversion = 0
@@ -41,30 +20,23 @@ config
 	symlinks = false
 	ignorecase = true
 [remote "origin"]
-	url = https://github.com/mlabrkic/nvim-lua-config.git
+	url = https://github.com/nvim-lua/kickstart.nvim.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
 ```
 
-https://github.com/nvim-lua/kickstart.nvim
 
-https://github.com/mlabrkic/nvim-lua-config
+### No_ 02: Add an "upstream" Remote Repository
 
-
-### No_ 03: It is also recommended to configure an "upstream" remote repository
-
-NOTE: <br>
-`cd nvim-lua-config`
-
-NOTE: <br>
-`git remote add upstream https://github.com/nvim-lua/kickstart.nvim`
+`cd nvim-lua-config` <br>
+`git remote add upstream https://github.com/nvim-lua/kickstart.nvim.git`
 
 You can also use SSH-based or HTTPS-based URLs.
 
 ```
-config
+nvim-lua-config\.git\config
 
 [core]
 	repositoryformatversion = 0
@@ -74,32 +46,56 @@ config
 	symlinks = false
 	ignorecase = true
 [remote "origin"]
-	url = https://github.com/mlabrkic/nvim-lua-config.git
+	url = https://github.com/nvim-lua/kickstart.nvim.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
 [remote "upstream"]
-	url = https://github.com/nvim-lua/kickstart.nvim
+	url = https://github.com/nvim-lua/kickstart.nvim.git
 	fetch = +refs/heads/*:refs/remotes/upstream/*
 ```
 
 
-### No_ 04: Configure the Remotes
+### No_ 03: Configure the Remotes - "upstream"
 
 Configure git to "pull" master from the "upstream" remote: <br>
 (branch "master") <br>
-NOTE: <br>
 `git config --local branch.master.remote upstream`
 
 Since one should never attempt to push to "upstream", <br>
 configure git to "push" always to "origin": <br>
-NOTE: <br>
 `git remote set-url --push upstream https://github.com/mlabrkic/nvim-lua-config.git`
 
+```
+nvim-lua-config\.git\config
+
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/nvim-lua/kickstart.nvim.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = upstream
+	merge = refs/heads/master
+[remote "upstream"]
+	url = https://github.com/nvim-lua/kickstart.nvim.git
+	fetch = +refs/heads/*:refs/remotes/upstream/*
+	pushurl = https://github.com/mlabrkic/nvim-lua-config.git
+```
+
+
+### No_ 04: Configure the Remotes - "origin"
+
+`git remote set-url origin https://github.com/mlabrkic/nvim-lua-config.git`
 
 ```
-config
+nvim-lua-config\.git\config
 
 [core]
 	repositoryformatversion = 0
@@ -115,10 +111,14 @@ config
 	remote = upstream
 	merge = refs/heads/master
 [remote "upstream"]
-	url = https://github.com/nvim-lua/kickstart.nvim
+	url = https://github.com/nvim-lua/kickstart.nvim.git
 	fetch = +refs/heads/*:refs/remotes/upstream/*
 	pushurl = https://github.com/mlabrkic/nvim-lua-config.git
 ```
+
+Info: <br>
+git pull (https://github.com/nvim-lua/kickstart.nvim) <br>
+git push (https://github.com/mlabrkic/nvim-lua-config)
 
 
 ### No_ 05: Listing the Remote Repositories
@@ -127,49 +127,44 @@ To list the remote repositories that are configured, along with their URLs: <br>
 `git remote -v`
 
 You should have two remote repositories: <br>
-"origin" pointing to your forked "kickstart.nvim" repository, and <br>
+"origin" pointing to your forked "kickstart.nvim" (new name "nvim-lua-config") repository, and <br>
 "upstream" pointing to the official "kickstart.nvim" repository:
 
 ```
 origin	https://github.com/mlabrkic/nvim-lua-config.git (fetch)
 origin	https://github.com/mlabrkic/nvim-lua-config.git (push)
 
-upstream	https://github.com/nvim-lua/kickstart.nvim (fetch)
+upstream	https://github.com/nvim-lua/kickstart.nvim.git (fetch)
 upstream	https://github.com/mlabrkic/nvim-lua-config.git (push)
 ```
 
 To verify the upstream for master: <br>
 `git config branch.master.remote`
 
-It should emit "upstream", <br>
-indicating to track/pull changes for main from the upstream remote.
+It should emit "upstream", indicating to track/pull changes for main from the upstream remote.
 
 
-### No_ 06:
+### No_ 06: Create a New Repository on GitHub
+
+To create a new repo on GitHub, log in and go to the GitHub home page.
+
+You can find the "New repository" option under the "+" sign next to your profile picture,
+in the top right corner of the navbar. <br>
+Leave the initial settings (Do not mark: license, readme,...)!!!
 
 
-To find the branch you are currently on: <br>
-`git branch` <br>
-==> * master
+### No_ 07: Push a Branch to GitHub
 
-NOTE: <br>
-`git pull` <br>
-(or git pull upstream master)
+git push origin my-new-branch <br>
 
-`git checkout master`
+==>
+(git push origin master) <br>
+`git push`
 
-
-Info, pull from <br>
-https://github.com/mlabrkic/nvim-lua-config <br>
-`git pull origin master`
-
-
----
 
 ### REFERENCES
 
 [Python: Git Bootcamp and Cheat Sheet](https://devguide.python.org/getting-started/git-boot-camp/index.html)
-
 
 ```
 git config -l --global
@@ -191,12 +186,9 @@ git config --global init.defaultBranch main
 ```
 
 ==> <br>
-.gitconfig
-
+`C:\Users\userName\.gitconfig`
 
 TODO: <br>
 Creating and Switching Branches <br>
 https://devguide.python.org/getting-started/git-boot-camp/index.html#creating-and-switching-branches
-
-
 
