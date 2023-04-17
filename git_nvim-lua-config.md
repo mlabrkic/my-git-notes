@@ -204,14 +204,23 @@ Optionally verify the commit using the log command: <br>
 
 ### No_ 09: Delete a branch "master"
 
-Optionally delete a branch "master": <br>
-`git branch -d master` <br>
+Optionally delete a **local** branch "master": <br>
+```
+git switch main
+git branch -d master
+```
+
 `git push origin -f`
+
+To delete a **remote** branch:
+`git push origin -d <branch-name>`
 
 
 ### REFERENCES
 
 [Python: Git Bootcamp and Cheat Sheet](https://devguide.python.org/getting-started/git-boot-camp/index.html)
+
+[github.com: renaming-a-branch](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/renaming-a-branch)
 
 ```
 git config -l --global
