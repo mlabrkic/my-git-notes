@@ -7,7 +7,6 @@ https://github.com/nvim-lua/kickstart.nvim
 `git clone https://github.com/nvim-lua/kickstart.nvim.git`
 
 NOTE: I changed the name of the repository from "kickstart.nvim" to "nvim-lua-config". <br>
-C:\PROJECTS\nvim-lua-config\
 
 ```
 C:\PROJECTS\nvim-lua-config\.git\config
@@ -90,7 +89,7 @@ nvim-lua-config\.git\config
 ```
 
 
-### No_ 04: Configure the Remotes - "origin"
+### No_ 04: Configure the Remotes - "origin" (url)
 
 `git remote set-url origin https://github.com/mlabrkic/nvim-lua-config.git`
 
@@ -115,10 +114,6 @@ nvim-lua-config\.git\config
 	fetch = +refs/heads/*:refs/remotes/upstream/*
 	pushurl = https://github.com/mlabrkic/nvim-lua-config.git
 ```
-
-Info: <br>
-git pull (https://github.com/nvim-lua/kickstart.nvim) <br>
-git push (https://github.com/mlabrkic/nvim-lua-config)
 
 
 ### No_ 05: Listing the Remote Repositories
@@ -155,11 +150,63 @@ Leave the initial settings (Do not mark: license, readme,...)!!!
 
 ### No_ 07: Push a Branch to GitHub
 
-git push origin my-new-branch <br>
+Instead of branch "master", I want branch "main".
 
-==>
-(git push origin master) <br>
-`git push`
+To find the branch you are currently on: <br>
+`git branch` <br>
+==> master
+
+To list all the branches, including the remote branches: <br>
+`git branch -a` <br>
+==> master
+
+Create a new branch from "master" and switch to it: <br>
+`git switch -c <branch-name> master` <br>
+`git switch -c main master`
+
+```
+Or
+Create a new branch from "master":
+git branch main master
+
+Switch to the new branch:
+git switch main
+```
+
+Push a Branch to GitHub: <br>
+`git push origin main`
+
+Info: <br>
+git pull  (https://github.com/nvim-lua/kickstart.nvim) <br>
+git push  (https://github.com/mlabrkic/nvim-lua-config)
+
+
+### No_ 08: Create a new "lazyconfig" branch from "main"
+
+Create a new branch from "main" and switch to it: <br>
+`git switch -c lazyconfig main`
+
+```
+Or
+
+Create a new branch from "main":
+git branch lazyconfig main
+
+Switch to the new branch:
+git switch lazyconfig
+
+git push origin lazyconfig
+```
+
+Optionally verify the commit using the log command: <br>
+`git log`
+
+
+### No_ 09: Delete a branch "master"
+
+Optionally delete a branch "master": <br>
+`git branch -d master` <br>
+`git push origin -f`
 
 
 ### REFERENCES
