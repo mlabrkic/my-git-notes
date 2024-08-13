@@ -1,0 +1,203 @@
+date: 2024-07M-31 20:23:55
+
+------------------------------------------------------------
+TODO: 1
+Configuring a remote repository for a fork
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork
+
+You must configure a remote that points to the upstream repository in Git
+to "sync changes you make in a fork" with the original repository.
+
+This also allows you to sync changes made in the original repository with the fork.
+
+Original repository:
+https://github.com/nvim-lua/kickstart.nvim
+
+My "kickstart.nvim" fork:
+https://github.com/mlabrkic/mykickstart.nvim
+
+--------------------
+1.
+Open Windows Command Shell
+
+--------------------
+2.
+Change the current working directory to your local project.
+
+List the current configured remote repository for your fork.
+xx:
+git remote -v
+
+==> "origin"
+origin	https://github.com/mlabrkic/mykickstart.nvim (fetch)
+origin	https://github.com/mlabrkic/mykickstart.nvim (push)
+
+Info:
+https://github.com/YOUR-USERNAME/YOUR-FORK.git
+
+--------------------
+3.
+Specify a new remote "upstream" repository that will be synced with the fork.
+
+xx:
+git remote add upstream https://github.com/nvim-lua/kickstart.nvim.git
+
+Info:
+git remote add upstream https://github.com/ORIGINAL-OWNER/ORIGINAL-REPOSITORY.git
+
+--------------------
+4.
+Verify the new "upstream" repository you've specified for your fork.
+
+xx:
+git remote -v
+
+==>
+origin	https://github.com/mlabrkic/mykickstart.nvim (fetch)
+origin	https://github.com/mlabrkic/mykickstart.nvim (push)
+upstream	https://github.com/nvim-lua/kickstart.nvim.git (fetch)
+upstream	https://github.com/nvim-lua/kickstart.nvim.git (push)
+
+--------------------
+
+------------------------------------------------------------
+TODO: 2
+Syncing a fork
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork
+
+Sync a fork of a repository to keep it up-to-date with the upstream repository.
+
+==>
+Syncing a fork branch from the command line
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-command-line
+
+--------------------
+Before you can sync your fork with an upstream repository,
+you must configure a remote that points to the upstream repository in Git.
+
+For more information, see "Configuring a remote repository for a fork."
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-repository-for-a-fork
+
+----------
+1.
+Open Windows Command Shell
+
+2.
+Change the current working directory to your local project.
+
+--------------------
+3.
+Fetch the branches and their respective commits from the upstream repository.
+Commits to BRANCH-NAME will be stored in the local branch upstream/BRANCH-NAME.
+
+git branch
+
+----------
+xx:
+git fetch upstream master
+==>
+From https://github.com/nvim-lua/kickstart.nvim
+*branch    master   FETCH_HEAD
+
+--------------------
+4. Switch to local branch 'master'
+xx:
+git switch master
+> Switched to branch 'master'
+
+--------------------
+5.
+Merge the changes from the upstream default branch
+- in this case, upstream/master - into your local default branch.
+
+This brings your fork's default branch into sync with the upstream repository,
+without losing your local changes.
+
+xx:
+git merge upstream/master
+==>
+CONFLICT: Merge conflict in init.lua
+
+If your local branch had unique commits, you may need to resolve conflicts.
+For more information, see "Addressing merge conflicts."
+
+----------
+Tip: Syncing your fork only updates your local copy of the repository.
+To update your fork on GitHub.com, you must push your changes.
+
+------------------------------------------------------------
+TODO: 3
+Addressing merge conflicts.
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts
+
+==>
+Resolving a merge conflict using the command line
+https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line
+
+--------------------
+"Competing line change merge conflicts"
+
+You can resolve merge conflicts using the command line and a text editor.
+Merge conflicts occur when competing changes are made to the same line of a file.
+
+To resolve a merge conflict caused by competing line changes,
+you must choose which changes to incorporate from the different branches in a new commit.
+
+Generate a list of the files affected by the merge conflict.
+In this example, the file styleguide.md has a merge conflict.
+
+xx:
+git status
+> # On branch branch-b
+> # You have unmerged paths.
+> #   (fix conflicts and run "git commit")
+> #
+> # Unmerged paths:
+> #   (use "git add <file>..." to mark resolution)
+> #
+> # both modified:      styleguide.md
+> #
+> no changes added to commit (use "git add" and/or "git commit -a")
+
+--------------------
+xx:
+Edit init.lua
+
+--  See `:help 'clipboard'`
+<<<<<<< HEAD
+-- vim.opt.clipboard = 'unnamedplus'  -- mlabrkic
+=======
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
+>>>>>>> upstream/master
+
+--------------------
+Decide if you want to keep only your branch's changes, keep only the other branch's changes,
+or make a brand new change, which may incorporate changes from both branches.
+
+Delete the conflict markers <<<<<<<, =======, >>>>>>> and make the changes you want in the final merge.
+In this example, both changes are incorporated into the final merge:
+
+If you have questions, please open an issue or ask in our IRC channel if it's more urgent.
+
+--------------------
+xx:
+Add or stage your changes.
+git add .
+
+git commit -m "syncing-a-fork-branch-from-the-command-line"
+
+git push -u origin master
+
+------------------------------------------------------------
+==>
+https://github.com/mlabrkic/mykickstart.nvim/commit/2bf7b0649462980203b776e934cbbd1f2c1e52ba
+
+commit
+2bf7b06
+
+(326 Commits)
+
+------------------------------------------------------------
+
