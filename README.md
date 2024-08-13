@@ -1,4 +1,4 @@
-### my-notes-comp
+### my-git-notes
 
 1. [Markdown Guide](/markdown.md)
 2. [Writing Markdown on Github](/markdown_github.md)
